@@ -1,7 +1,102 @@
 ﻿@page "/Registro"
+@using RegistroCliente.Entidades
+@using RegistroCliente.DAL
 
 <h3>Registro</h3>
 
+<EditForm Model="@clientes" OnValidSubmit="@Guardar">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label for="Nombre"> Nombre</label>
+        <InputText @bind-Value="@clientes.Nombres" class="form-control" />
+        <ValidationMessage For="@(()=> clientes.Nombres)" />
+    </div>
+    <div class="form-group">
+        <label for="Cedula"> Cedula</label>
+        <InputText @bind-Value="@clientes.Cedula" class="form-control" />
+        <ValidationMessage For="@(()=> clientes.Cedula)" />
+    </div>
+    <div class="form-group">
+        <label for="Email"> Email</label>
+        <InputText @bind-Value="@clientes.Email" class="form-control" />
+        <ValidationMessage For="@(()=> clientes.Email)" />
+    </div>
+    <div class="form-group">
+        <label for="Direccion"> Direccion</label>
+        <InputText @bind-Value="@clientes.Direccion" class="form-control" />
+        <ValidationMessage For="@(()=> clientes.Direccion)" />
+    </div>
+
+    <div class="form-group">
+        <label for="Telefono"> Telefono</label>
+        <InputNumber @bind-Value="@clientes.Telefono" class="form-control" />
+        <ValidationMessage For="@(()=> clientes.Telefono)" />
+    </div>
+</EditForm>
+
+
+<button class="btn btn-primary" @onclick="Guardar">Guardar</button>
+
+
+
 @code {
+
+    private int Id = 0;
+    Clientes clientes = new Clientes();
+
+
+    private void Guardar()
+    {
+        Contexto db = new Contexto();
+
+        Id++;
+        db.clientes.Add(clientes);
+        db.SaveChanges();
+        clientes = new Clientes();
+
+    }
+
+         
+   /* public void Guardar()
+    {
+        RepositorioBase<Clientes> db = new RepositorioBase<Clientes>();
+        Mensaje = string.Empty;
+
+        try
+        {
+            if (ClienteId == 0)
+            {
+
+                if(db.Guardar(Cliente))
+                {
+                    Mensaje = "Guardado Exitosamente";
+                    Cliente = new Clientes();
+                }
+                else
+                {
+                    Mensaje = "No se pudo guardar";
+                }
+            }
+            else
+            {
+                Cliente.ClienteId = ClienteId;
+                if(db.Modificar(Cliente))
+                {
+                    Mensaje = "Modificado Exitosamente";
+                    Cliente = new Clientes();
+                    ClienteId = 0;
+                }
+                else
+                {
+                    Mensaje = "No se pudo Modificar";
+                }
+            }
+        }
+        catch (Exception) { throw; }
+
+
+    }
+    */
+
 
 }

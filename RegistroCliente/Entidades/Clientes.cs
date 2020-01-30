@@ -19,14 +19,14 @@ namespace RegistroCliente.Entidades
         public int Telefono { get; set; }
 
 
-        public Clientes(int clienteId, string nombres, string cedula, string email, string direccion, int telefono)
+        public Clientes()
         {
-            ClienteId = clienteId;
-            Nombres = nombres;
-            Cedula = cedula;
-            Email = email;
-            Direccion = direccion;
-            Telefono = telefono;
+            ClienteId = 0;
+            Nombres = string.Empty;
+            Cedula = string.Empty;
+            Email = string.Empty;
+            Direccion = string.Empty;
+            Telefono = 0;
         }
 
 
